@@ -11,7 +11,6 @@ public class Login extends JFrame implements ActionListener {
     JTextField tfname;
     JCheckBox darkMode;
     JLabel welcomeMsg;
-    JLabel profileImage;
     JButton viewHistory;
 
     public Login() {
@@ -77,13 +76,6 @@ public class Login extends JFrame implements ActionListener {
         viewHistory.setForeground(Color.WHITE);
         viewHistory.addActionListener(this);
         add(viewHistory);
-
-        profileImage = new JLabel();
-        profileImage.setBounds(1050, 50, 100, 100);
-        ImageIcon defaultIcon = new ImageIcon(ClassLoader.getSystemResource("icons/profile.png"));
-        Image scaledImage = defaultIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        profileImage.setIcon(new ImageIcon(scaledImage));
-        add(profileImage);
 
         setSize(1200, 500);
         setLocation(200, 150);
