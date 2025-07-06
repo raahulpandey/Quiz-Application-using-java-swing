@@ -35,16 +35,17 @@ Quiz Master Pro is an interactive and feature-rich desktop quiz application buil
 
 ## 📂 Project Structure
 
+```
 QuizApplication/
 │
 ├── data/
-│ ├── score_history.txt
-│ └── leaderboard.txt
+│   ├── score_history.txt
+│   └── leaderboard.txt
 │
 ├── icons/
-│ ├── quiz.jpg
-│ ├── score.png
-│ └── timeout.wav
+│   ├── quiz.jpg
+│   ├── score.png
+│   └── timeout.wav
 │
 ├── Login.java
 ├── Register.java
@@ -54,6 +55,8 @@ QuizApplication/
 ├── ScoreHistoryWriter.java
 ├── Leaderboard.java
 └── SoundUtils.java
+```
+
 ---
 
 ## 🛠️ Technologies Used
@@ -69,6 +72,20 @@ QuizApplication/
 ## ⚙️ How to Run
 
 1. **Clone the Repository**  
+   ```
+   git clone https://github.com/raahulpandey/Quiz-Application-using-java-swing.git
+   cd Quiz-Application-using-java-swing
+   ```
+
+2. **Compile all files**  
+   ```
+   javac *.java
+   ```
+
+3. **Run the application**  
+   ```
+   java Login
+   ```
 
 > Make sure your `icons` and `data` folders are in the correct directory before running.
 
@@ -94,8 +111,8 @@ Feel free to fork the repo, raise issues, or submit pull requests.
 ## 👨‍💻 Author
 
 **Rahul Pandey**  
-📧 [YourEmail@example.com]  
-🔗 [GitHub Profile](https://github.com/raahulpandey)
+📧 arryaroy7367@gmail.com  
+🔗 [GitHub Profile](https://github.com/raahulpandey/)
 
 ---
 
