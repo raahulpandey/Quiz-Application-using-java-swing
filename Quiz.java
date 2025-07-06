@@ -1,3 +1,4 @@
+// Quiz.java
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -7,6 +8,7 @@ public class Quiz extends JFrame implements ActionListener {
     String questions[][] = new String[10][5];
     String answers[][] = new String[10][2];
     String useranswers[][] = new String[10][1];
+
     JLabel qno, question, timerLabel;
     JRadioButton opt1, opt2, opt3, opt4;
     ButtonGroup groupoptions;
@@ -17,10 +19,12 @@ public class Quiz extends JFrame implements ActionListener {
     int score = 0;
     Timer quizTimer;
 
-    String name;
+    String name, category;
 
-    Quiz(String name) {
+    public Quiz(String name, String category) {
         this.name = name;
+        this.category = category;
+
         setBounds(50, 0, 1440, 850);
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -46,7 +50,6 @@ public class Quiz extends JFrame implements ActionListener {
         timerLabel.setForeground(Color.RED);
         add(timerLabel);
 
-        // Initialize radio buttons
         opt1 = new JRadioButton();
         opt2 = new JRadioButton();
         opt3 = new JRadioButton();
@@ -93,84 +96,66 @@ public class Quiz extends JFrame implements ActionListener {
         submit.setEnabled(false);
         add(submit);
 
-        setupQuestions();
+        setupQuestions(category);
         start(count);
         startTimer();
 
         setVisible(true);
     }
 
-    void setupQuestions() {
-        questions[0][0] = "Which is used to find and fix bugs in the Java programs.?";
-        questions[0][1] = "JVM";
-        questions[0][2] = "JDB";
-        questions[0][3] = "JDK";
-        questions[0][4] = "JRE";
-
-        questions[1][0] = "What is the return type of the hashCode() method in the Object class?";
-        questions[1][1] = "int";
-        questions[1][2] = "Object";
-        questions[1][3] = "long";
-        questions[1][4] = "void";
-
-        questions[2][0] = "Which package contains the Random class?";
-        questions[2][1] = "java.util package";
-        questions[2][2] = "java.lang package";
-        questions[2][3] = "java.awt package";
-        questions[2][4] = "java.io package";
-
-        questions[3][0] = "An interface with no fields or methods is known as?";
-        questions[3][1] = "Runnable Interface";
-        questions[3][2] = "Abstract Interface";
-        questions[3][3] = "Marker Interface";
-        questions[3][4] = "CharSequence Interface";
-
-        questions[4][0] = "In which memory a String is stored, when we create a string using new operator?";
-        questions[4][1] = "Stack";
-        questions[4][2] = "String memory";
-        questions[4][3] = "Random storage space";
-        questions[4][4] = "Heap memory";
-
-        questions[5][0] = "Which of the following is a marker interface?";
-        questions[5][1] = "Runnable interface";
-        questions[5][2] = "Remote interface";
-        questions[5][3] = "Readable interface";
-        questions[5][4] = "Result interface";
-
-        questions[6][0] = "Which keyword is used for accessing the features of a package?";
-        questions[6][1] = "import";
-        questions[6][2] = "package";
-        questions[6][3] = "extends";
-        questions[6][4] = "export";
-
-        questions[7][0] = "In java, jar stands for?";
-        questions[7][1] = "Java Archive Runner";
-        questions[7][2] = "Java Archive";
-        questions[7][3] = "Java Application Resource";
-        questions[7][4] = "Java Application Runner";
-
-        questions[8][0] = "Which of the following is a mutable class in java?";
-        questions[8][1] = "java.lang.StringBuilder";
-        questions[8][2] = "java.lang.Short";
-        questions[8][3] = "java.lang.Byte";
-        questions[8][4] = "java.lang.String";
-
-        questions[9][0] = "Which of the following option leads to the portability and security of Java?";
-        questions[9][1] = "Bytecode is executed by JVM";
-        questions[9][2] = "The applet makes the Java code secure and portable";
-        questions[9][3] = "Use of exception handling";
-        questions[9][4] = "Dynamic binding between objects";
-
-        answers[0][1] = "JDB";
-        answers[1][1] = "int";
-        answers[2][1] = "java.util package";
-        answers[3][1] = "Marker Interface";
-        answers[4][1] = "Heap memory";
-        answers[5][1] = "Remote interface";
-        answers[6][1] = "import";
-        answers[7][1] = "Java Archive";
-        answers[8][1] = "java.lang.StringBuilder";
-        answers[9][1] = "Bytecode is executed by JVM";
+    void setupQuestions(String category) {
+        if (category.equalsIgnoreCase("Java")) {
+            String[][] javaQs = {
+                {"Which is used to find and fix bugs in Java programs?", "JVM", "JDB", "JDK", "JRE", "JDB"},
+                {"What is the return type of hashCode()?", "int", "Object", "long", "void", "int"},
+                {"Which package has Random class?", "java.util", "java.lang", "java.awt", "java.io", "java.util"},
+                {"An interface with no methods is?", "Runnable", "Abstract", "Marker", "CharSequence", "Marker"},
+                {"String using 'new' is stored in?", "Stack", "String pool", "Heap", "Code Segment", "Heap"},
+                {"Which is a marker interface?", "Runnable", "Remote", "Readable", "Result", "Remote"},
+                {"Keyword to use package features?", "import", "package", "extends", "export", "import"},
+                {"In Java, JAR stands for?", "Java Archive Runner", "Java Archive", "Java Application Resource", "Java App Runner", "Java Archive"},
+                {"Which is mutable in Java?", "StringBuilder", "Short", "Byte", "String", "StringBuilder"},
+                {"What leads to Java's portability?", "Bytecode in JVM", "Applet", "Exception handling", "Dynamic binding", "Bytecode in JVM"}
+            };
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 5; j++) questions[i][j] = javaQs[i][j];
+                answers[i][1] = javaQs[i][5];
+            }
+        } else if (category.equalsIgnoreCase("General Knowledge")) {
+            String[][] gk = {
+                {"Who is known as the Father of the Nation (India)?", "Subhash Chandra Bose", "Jawaharlal Nehru", "Mahatma Gandhi", "B. R. Ambedkar", "Mahatma Gandhi"},
+                {"Which planet is known as the Red Planet?", "Earth", "Mars", "Jupiter", "Saturn", "Mars"},
+                {"What is the capital of France?", "Madrid", "Berlin", "Paris", "Rome", "Paris"},
+                {"Which festival is known as the festival of lights?", "Holi", "Diwali", "Eid", "Navratri", "Diwali"},
+                {"Who wrote the Indian National Anthem?", "Bankim Chandra", "Tagore", "Premchand", "Naidu", "Tagore"},
+                {"Which is the largest ocean on Earth?", "Indian", "Pacific", "Arctic", "Atlantic", "Pacific"},
+                {"Which gas do plants absorb?", "Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen", "Carbon Dioxide"},
+                {"Taj Mahal is located in?", "Delhi", "Mumbai", "Agra", "Jaipur", "Agra"},
+                {"Which country is called the Land of Rising Sun?", "China", "Thailand", "Japan", "Korea", "Japan"},
+                {"What is the full form of GDP?", "Gross Domestic Product", "Global Data Position", "Graph Development Plan", "Gross Data Production", "Gross Domestic Product"}
+            };
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 5; j++) questions[i][j] = gk[i][j];
+                answers[i][1] = gk[i][5];
+            }
+        } else if (category.equalsIgnoreCase("Math")) {
+            String[][] math = {
+                {"What is 12 + 8?", "20", "22", "19", "21", "20"},
+                {"What is 15 - 7?", "9", "8", "7", "6", "8"},
+                {"What is 9 x 3?", "27", "26", "24", "30", "27"},
+                {"What is 20 ÷ 4?", "6", "4", "5", "3", "5"},
+                {"What is the square of 5?", "15", "20", "10", "25", "25"},
+                {"What is the cube of 2?", "8", "6", "4", "12", "8"},
+                {"What is 100 - 55?", "40", "45", "50", "60", "45"},
+                {"What is 7 x 6?", "42", "36", "48", "40", "42"},
+                {"What is 10 + 15 - 5?", "20", "25", "15", "18", "20"},
+                {"What is 144 ÷ 12?", "12", "10", "14", "13", "12"}
+            };
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 5; j++) questions[i][j] = math[i][j];
+                answers[i][1] = math[i][5];
+            }
+        }
     }
 
     void start(int count) {
@@ -191,12 +176,9 @@ public class Quiz extends JFrame implements ActionListener {
         quizTimer = new Timer(1000, e -> {
             timer--;
             timerLabel.setText("Time left - " + timer + " seconds");
-
             if (timer <= 0) {
                 quizTimer.stop();
-                SoundUtils.playSound("icons/timeout.wav");
                 handleAnswer();
-
                 if (count == 9) {
                     showScore();
                 } else {
@@ -205,7 +187,6 @@ public class Quiz extends JFrame implements ActionListener {
                     timer = 15;
                     startTimer();
                 }
-
                 if (count == 8) {
                     next.setEnabled(false);
                     submit.setEnabled(true);
@@ -262,6 +243,6 @@ public class Quiz extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Quiz("User");
+        new Quiz("User", "Java");
     }
 }
